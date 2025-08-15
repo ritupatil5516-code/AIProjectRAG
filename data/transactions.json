@@ -1,0 +1,26 @@
+[
+  {
+    "transactionId": "t3",
+    "transactionType": "INTEREST",
+    "transactionStatus": "POSTED",
+    "transactionDateTime": "2025-08-01T03:59:57Z",
+    "amount": 12.04,
+    "endingBalance": 936.67
+  },
+  {
+    "transactionId": "t2",
+    "transactionType": "INTEREST",
+    "transactionStatus": "POSTED",
+    "transactionDateTime": "2025-07-01T03:59:57Z",
+    "amount": 11.51,
+    "endingBalance": 924.63
+  },
+  {
+    "transactionId": "t1",
+    "transactionType": "INTEREST",
+    "transactionStatus": "POSTED",
+    "transactionDateTime": "2025-06-01T03:59:57Z",
+    "amount": 9.12,
+    "endingBalance": 913.12
+  }
+]

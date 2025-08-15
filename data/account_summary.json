@@ -1,0 +1,12 @@
+[
+  {
+    "accountId": "f88f4b88-749a-4ff0-bc16-2d7836a4e2bd",
+    "availableCredit": 0.0,
+    "currentBalance": 936.67,
+    "statementBalance": 936.67,
+    "purchaseApr": 15.24,
+    "highestPriorityStatus": "DELINQUENT",
+    "billingCycleOpenDateTime": "2025-08-01T04:00:00Z",
+    "billingCycleCloseDateTime": "2025-09-01T03:59:57Z"
+  }
+]

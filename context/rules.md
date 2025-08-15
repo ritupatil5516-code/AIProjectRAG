@@ -1,0 +1,1 @@
+# Rules\nCurrent balance = latest posted endingBalance; scheduled payment = earliest future effectiveDateTime; interest totals = sum posted INTEREST (default all).

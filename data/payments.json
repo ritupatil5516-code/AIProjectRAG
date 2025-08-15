@@ -1,0 +1,27 @@
+[
+  {
+    "paymentId": "p2",
+    "state": "SCHEDULED",
+    "paymentDateTime": "2025-08-13T04:00:00Z",
+    "effectiveDateTime": "2025-08-22T04:00:01Z",
+    "amount": 100.0,
+    "fundingSource": [
+      {
+        "fundingType": "ACH",
+        "last4Account": "6789"
+      }
+    ]
+  },
+  {
+    "paymentId": "p1",
+    "state": "POSTED",
+    "paymentDateTime": "2025-04-11T04:00:00Z",
+    "effectiveDateTime": "2025-04-11T04:00:00Z",
+    "amount": 100.0,
+    "fundingSource": [
+      {
+        "fundingType": "OFFLINE"
+      }
+    ]
+  }
+]

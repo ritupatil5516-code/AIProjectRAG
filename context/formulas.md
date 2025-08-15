@@ -1,0 +1,1 @@
+# Formulas\nDPR = APR/365; interest per day = DPR*balance; cycle interest = sum(day).

@@ -1,0 +1,1 @@
+# Glossary\nAccount, Statement, Transaction, Payment, APR/DPR, Trailing interest.
