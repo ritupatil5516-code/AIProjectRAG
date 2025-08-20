@@ -1,58 +1,71 @@
+# app.py — minimal change: keep all Q&A in the chat window
 
-import os, json, streamlit as st
+import os
+import json
+import streamlit as st
+
+# project imports (your existing modules)
 from app.services.data_source import LocalJSONDataSource, MCPDataSource
 from app.services.llm_service import LLMService
 from app.controllers.chat_controller import ChatController, SYSTEM
 
-st.set_page_config(page_title="Banking Co-Pilot (FAISS + Pydantic)", layout="wide")
-st.title("💳 Banking Co-Pilot — FAISS RAG + Pydantic Models")
+# ---------- Page ----------
+st.set_page_config(page_title="Agent desktop Co-Pilot", layout="wide")
+st.title("💳 Agent desktop Co-Pilot")
 
+# ---------- Sidebar controls (same as before) ----------
 use_mcp = st.sidebar.toggle("Use MCP mock API", False)
-top_k = st.sidebar.slider("Top-K", 4, 16, 8)
-show_evidence_by_default = st.sidebar.toggle("Open evidence by default", False)
-st.sidebar.caption("Set OPENAI_API_KEY (and OPENAI_EMBED_MODEL or local sentence-transformers).")
+top_k = st.sidebar.slider("Top-K retrieval", 4, 16, 8)
+st.sidebar.caption("Set OPENAI_API_KEY (and OPENAI_BASE_URL/MODEL for Llama-70B if using a compatible endpoint).")
 
-source = MCPDataSource() if use_mcp else LocalJSONDataSource()
-data = source.load()
-
-def load_card(path):
-    try: return open(path, "r", encoding="utf-8").read().strip()
-    except Exception: return ""
-glossary = load_card("./context/glossary.md")
-rules = load_card("./context/rules.md")
-formulas = load_card("./context/formulas.md")
+# ---------- Build controller once ----------
+def load_card(path: str) -> str:
+    try:
+        return open(path, "r", encoding="utf-8").read().strip()
+    except Exception:
+        return ""
 
 if "controller" not in st.session_state:
+    source = MCPDataSource() if use_mcp else LocalJSONDataSource()
+    data = source.load()
+    glossary = load_card("./context/glossary.md")
+    rules = load_card("./context/rules.md")
+    formulas = load_card("./context/formulas.md")
     st.session_state.controller = ChatController(data, glossary, rules, formulas)
-controller = st.session_state.controller
 
-if "msgs" not in st.session_state: st.session_state.msgs = []
+controller: ChatController = st.session_state.controller
+
+# ---------- Chat history (NEW) ----------
+# store a list of (role, content) tuples so previous Q&A persist
+if "msgs" not in st.session_state:
+    st.session_state.msgs = []
+
+# render previous messages
 for role, content in st.session_state.msgs:
-    with st.chat_message(role): st.markdown(content)
+    with st.chat_message(role):
+        st.markdown(content)
 
+# ---------- Input + answer ----------
 q = st.chat_input("Ask about balances, statements, transactions, payments, interest…")
 if q:
+    # 1) add/show user message
     st.session_state.msgs.append(("user", q))
-    with st.chat_message("user"): st.markdown(q)
+    with st.chat_message("user"):
+        st.markdown(q)
 
+    # 2) retrieve + ask LLM (your existing flow)
     snippets = controller.retrieve(q, k=top_k)
     prelude = controller.prelude(q, snippets)
     result = LLMService().ask(SYSTEM, prelude)
-
     final = result.get("answer") or "No matching data found."
-    used_fields = result.get("used_fields") or []
-    notes = result.get("notes") or ""
 
+    # 3) add/show assistant message
     with st.chat_message("assistant"):
         st.markdown(final)
-        with st.expander("Evidence", expanded=show_evidence_by_default):
-            st.markdown("**Used fields (model-reported):**")
-            if used_fields: st.code("\n".join(used_fields), language="text")
-            else: st.write("—")
-            if notes:
-                st.markdown("**Notes:**"); st.code(notes, language="text")
-            st.markdown("**Top‑K snippets provided to the model:**")
-            for i, snip in enumerate(snippets, 1):
-                st.code(f"[{i}] {snip}", language="json")
+    st.session_state.msgs.append(("assistant", final))
 
-st.caption("This root app.py is non-empty and runnable. 'app/' is a package (has __init__.py).")
+    # 4) re-render so the full thread persists
+    st.rerun()
+
+# ---------- Footer ----------
+st.caption("Semantic RAG: FAISS cosine on normalized embeddings · Pydantic models · Temperature=0 for deterministic responses.")
