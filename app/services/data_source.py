@@ -1,6 +1,8 @@
 
 import os, json
+from typing import Optional
 from app.core.schemas import DataBundle, AccountSummary, Transaction, Statement, Payment
+from app.core.schemas_agreement import Agreement
 
 class LocalJSONDataSource:
     def __init__(self, data_dir: str = None):
@@ -28,3 +30,11 @@ class MCPDataSource:
             statements=[Statement(**o) for o in _get("/api/statements")],
             payments=[Payment(**o) for o in _get("/api/payments")]
         )
+
+class AgreementSource:
+    def __init__(self, path: str = "./data/agreement.json"):
+        self.path = path
+    def load_if_exists(self) -> Optional[Agreement]:
+        if not os.path.exists(self.path):
+            return None
+        return Agreement(**json.load(open(self.path)))
