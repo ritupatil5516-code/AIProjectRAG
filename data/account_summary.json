@@ -1,6 +1,7 @@
 [
   {
-    "accountId": "tes-1",
+    "accountId": "acc-001",
+    "creditLimit": 40000.0,
     "availableCredit": 0.0,
     "currentBalance": 936.67,
     "statementBalance": 936.67,

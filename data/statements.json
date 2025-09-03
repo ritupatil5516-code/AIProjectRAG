@@ -1,8 +1,38 @@
 [
   {
-    "statementId": "s1",
-    "openingDateTime": "2025-02-11T05:00:00Z",
-    "closingDateTime": "2025-03-01T04:59:57Z",
-    "dueDate": "2025-04-01"
+    "statementId": "st-2025-06",
+    "openingDateTime": "2025-06-01T00:00:00Z",
+    "closingDateTime": "2025-06-30T23:59:57Z",
+    "dueDate": "2025-07-25",
+    "purchases": 0.0,
+    "paymentsAndCredits": 0.0,
+    "interestCharged": 9.12,
+    "feesCharged": 0.0,
+    "minimumPaymentDue": 25.0,
+    "unpaidBalance": 913.12
+  },
+  {
+    "statementId": "st-2025-07",
+    "openingDateTime": "2025-07-01T00:00:00Z",
+    "closingDateTime": "2025-07-31T23:59:57Z",
+    "dueDate": "2025-08-25",
+    "purchases": 0.0,
+    "paymentsAndCredits": 0.0,
+    "interestCharged": 11.51,
+    "feesCharged": 0.0,
+    "minimumPaymentDue": 25.0,
+    "unpaidBalance": 924.63
+  },
+  {
+    "statementId": "st-2025-08",
+    "openingDateTime": "2025-08-01T00:00:00Z",
+    "closingDateTime": "2025-08-31T23:59:57Z",
+    "dueDate": "2025-09-25",
+    "purchases": 0.0,
+    "paymentsAndCredits": 0.0,
+    "interestCharged": 12.04,
+    "feesCharged": 0.0,
+    "minimumPaymentDue": 25.0,
+    "unpaidBalance": 936.67
   }
 ]

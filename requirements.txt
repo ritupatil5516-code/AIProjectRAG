@@ -1,7 +1,10 @@
-streamlit==1.37.1
-pydantic>=2.7.0
-faiss-cpu==1.8.0.post1
+streamlit>=1.36.0
+openai>=1.30.0
+faiss-cpu>=1.8.0
+sentence-transformers>=2.7.0
 numpy>=1.26.0
-openai>=1.35.0
-sentence-transformers>=3.0.1
+pydantic>=2.7.0
 PyPDF2>=3.0.1
+python-dateutil>=2.9.0.post0
+tiktoken>=0.7.0
+zoneinfo; platform_system=="Windows"

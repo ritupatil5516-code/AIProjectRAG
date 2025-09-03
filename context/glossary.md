@@ -1,5 +1,8 @@
-# Glossary
-- Average Daily Balance (ADB): Mean of posted end-of-day balances for a cycle.
-- DPR: Daily Periodic Rate = APR / basis days (365 unless agreement says 360).
-- Grace Period: Applies when the prior statement balance is paid in full by due date.
-- Trailing Interest: Interest accrued from cycle start until payment posts.
+**Glossary**
+- Statement Period: openingDateTime (inclusive) to closingDateTime (exclusive).
+- Current Balance: latest posted balance as of now.
+- Available Credit = creditLimit – currentBalance.
+- DPR = APR / apr_basis (usually 365).
+- ADB: mean of end‑of‑day posted balances.
+- Trailing Interest: accrues until a payment posts.
+- Posted only: only transactionStatus="POSTED" counts.

@@ -1,4 +1,5 @@
-# Interest Formulas
-- DPR = APR / apr_basis
-- Interest(month) = ADB × DPR × days_in_month
-- Minimum Payment = max(minFixedFloor, minPercentOfBalance × cycleEndBalance + interest + fees + pastDue)
+**Formulas**
+- DPR = APR / apr_basis.
+- Monthly interest = sum(daily_balance * DPR) with rounding policy:
+  - sum_then_round (default)
+  - daily_then_sum (round each day to cent then sum)
